@@ -1,0 +1,57 @@
+<!doctype html>
+<html ng-app="todoListApp">
+
+<head>
+    <title>Todo List</title>
+    <!-- Link bootstrap files -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body ng-controller="mainCtrl">
+    <div class="container">
+        <!-- Row containing all elements -->
+        <div class="row">
+            <div class="col-xs-4">
+                <!-- 2 columns in same row-->
+                <div class="panel panel-info">
+                    <div class="panel-heading">Todo List</div>
+                    <div class="panel-body">
+                        <label for="task">Task</label>
+                        <input ng-model="task.text" class="form-control">
+                        <br>
+                        <!-- Priority selector -->
+                        <label for="priority">Priority</label>
+                        <select ng-model="task.priority" class="form-control" id="priorities">
+                            <option></option>
+                            <option value="1">High Priority</option>
+                            <option value="2">Medium Priority</option>
+                            <option value="3">Low Priority</option>
+                        </select>
+                        <br>
+                    </div>
+                    <div class="panel-footer">
+                        <button ng-click="getTask()" type="button" class="btn btn-primary">Add Todo</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-8">
+                <!-- Priority Organingzer Buttons -->
+                <button ng-click="sort= '+priority';" class="btn btn-danger">Order By Highest Priority</button>
+                <button ng-click="sort= '-priority';" class="btn btn-success">Order By Lowest Priority</button>
+                <button ng-click="sort= 'text';" class="btn btn-warning">Order Alphabetically</button>
+                <!-- Create table for Priority Items -->
+                <div ng-repeat="task in todos | orderBy: sort" ng-class="{'bg-danger': task.priority ==='1', 'bg-warning': task.priority ==='2', 'bg-success': task.priority ==='3'}">{{task.text}}</div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Link scripts -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
+
+
